@@ -5,7 +5,6 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
-import { oneOf } from "prop-types";
 import { useNavigate } from "react-router-dom";
 
 const Reg = () => {
@@ -22,8 +21,6 @@ const Reg = () => {
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });

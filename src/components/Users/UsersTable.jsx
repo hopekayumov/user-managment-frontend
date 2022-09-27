@@ -6,7 +6,6 @@ import UsersTableItem from "./UsersTableItem";
 import UserToolbar from "./UserToolbar";
 
 const UsersTable = ({ ...props }) => {
-  const [users, setUsers] = useState([]);
   const [userTable, setUserTable] = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
