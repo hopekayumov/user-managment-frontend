@@ -26,7 +26,7 @@ const Auth = () => {
   const submitForm = async (data) => {
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}api/login/`,
+        "https://usermanagment1.herokuapp.com/api/login/",
         {
           email: data.email,
           password: data.password,

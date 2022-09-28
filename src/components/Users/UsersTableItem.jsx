@@ -1,4 +1,7 @@
-import React from "react";
+import React, {useContext} from "react";
+import axios from "axios";
+import {useAuthContext} from "../../contexts";
+import {UserContext} from "../../contexts/UserContext";
 
 const UsersTableItem = ({
   id,
@@ -11,6 +14,32 @@ const UsersTableItem = ({
   onToggleCheck,
 }) => {
   const formatDate = (date) => new Date(date).toUTCString().substr(5, 20);
+
+  const [userTable, setUserTable] = useContext(UserContext)
+
+  const {token, setToken} = useAuthContext();
+
+  const handleDelete = (id) => {
+    axios({
+      method: "DELETE",
+      url: "https://usermanagment1.herokuapp.com/api/admin/",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+      data: {
+        users: id
+      }
+    }).then(data => {
+      if (data.data.status === "ok") {
+        setUserTable(userTable?.filter((item) => item._id !== id));
+      } else {
+        setToken(null);
+        localStorage.removeItem("name");
+      }
+      document.querySelector("#checkboxNoLabel2").checked = false;
+    })
+  }
 
   return (
     <tr
@@ -46,12 +75,12 @@ const UsersTableItem = ({
         <td className="py-4 px-6 text-emerald-600 font-bold">active</td>
       )}
       <td className="flex items-center py-4 px-6 space-x-3">
-        <a
-          href="#"
+        <button
+          onClick={() => handleDelete(id)}
           className="font-medium text-red-600 dark:text-red-500 hover:underline"
         >
           Remove
-        </a>
+        </button>
       </td>
     </tr>
   );

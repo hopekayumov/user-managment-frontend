@@ -28,7 +28,7 @@ const Reg = () => {
   const submitForm = async (data) => {
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}api/register/`,
+        "https://usermanagment1.herokuapp.com/api/register/",
         {
           name: data.name,
           email: data.email,

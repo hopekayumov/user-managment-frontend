@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { useAuthContext } from "../../contexts";
+import usersTable from "./UsersTable";
 
 const UserToolbar = ({ ...props }) => {
   const [userTable, setUserTable] = useContext(UserContext);
@@ -19,7 +20,7 @@ const UserToolbar = ({ ...props }) => {
     event.preventDefault();
     let users = getCheckedUsersList();
     const response = await fetch(
-      `${process.env.REACT_APP_BASE_URL}api/admin/`,
+      "https://usermanagment1.herokuapp.com/api/admin/",
       {
         method: "PUT",
         headers: {
@@ -48,7 +49,7 @@ const UserToolbar = ({ ...props }) => {
     event.preventDefault();
     let users = getCheckedUsersList();
     const response = await fetch(
-      `${process.env.REACT_APP_BASE_URL}api/admin/`,
+      "https://usermanagment1.herokuapp.com/api/admin/",
       {
         method: "DELETE",
         headers: {
@@ -62,7 +63,8 @@ const UserToolbar = ({ ...props }) => {
     );
     const data = await response.json();
     if (data.status === "ok") {
-      setUserTable(data.table.map((item) => ({ ...item, isChecked: false })));
+      let users = getCheckedUsersList();
+      setUserTable(userTable?.filter((item) => !users.includes(item._id)));
     } else {
       alert(data.error);
       props.setUserName("");

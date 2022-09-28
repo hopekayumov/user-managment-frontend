@@ -25,7 +25,7 @@ const UsersTable = ({ ...props }) => {
 
   const getUsers = () => {
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}api/admin`, {
+      .get("https://usermanagment1.herokuapp.com/api/admin", {
         headers: {
           "x-access-token": token,
         },
@@ -57,7 +57,7 @@ const UsersTable = ({ ...props }) => {
   }
 
   return (
-    <div className="max-w-screen-xl mx-auto mt-[130px] overflow-x-auto relative shadow-md sm:rounded-lg">
+    <div className="container px-8 mx-auto mt-[130px] overflow-x-auto relative shadow-md sm:rounded-lg">
       <UserToolbar {...props} />
 
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
