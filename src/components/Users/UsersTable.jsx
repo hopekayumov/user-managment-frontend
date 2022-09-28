@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, {useEffect, useState, useContext} from "react";
 import axios from "axios";
 import { useAuthContext } from "../../contexts";
 import { UserContext } from "../../contexts/UserContext";
@@ -20,26 +20,22 @@ const UsersTable = ({ ...props }) => {
   };
 
   useEffect(() => {
-    getUsers();
-  }, []);
-
-  const getUsers = () => {
     axios
-      .get("https://usermanagment1.herokuapp.com/api/admin", {
-        headers: {
-          "x-access-token": token,
-        },
-      })
-      .then((data) => {
-        if (data.data.status === "ok") {
-          setUserTable(
-            data.data.table.map((item) => ({ ...item, isChecked: false }))
-          );
-          setLoading(false);
-        }
-      })
-      .catch((error) => console.log(error));
-  };
+        .get("https://usermanagment1.herokuapp.com/api/admin", {
+          headers: {
+            "x-access-token": token,
+          },
+        })
+        .then((data) => {
+          if (data.data.status === "ok") {
+            setUserTable(
+                data.data.table.map((item) => ({ ...item, isChecked: false }))
+            );
+            setLoading(false);
+          }
+        })
+        .catch((error) => console.log(error));
+  }, [setUserTable, token]);
 
   const onToggleCheck = (id) => {
     setUserTable((prev) =>

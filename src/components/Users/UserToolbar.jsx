@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { useAuthContext } from "../../contexts";
-import usersTable from "./UsersTable";
 
 const UserToolbar = ({ ...props }) => {
   const [userTable, setUserTable] = useContext(UserContext);
